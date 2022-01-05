@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
-import _ from "lodash";
-import libraryLogo from "../images/library-lg.png";
-import switchOrder from "../images/switch-order-logo.png";
-import book from "../images/book.png";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import _ from 'lodash';
+import libraryLogo from '../images/library-lg.png';
+import switchOrder from '../images/switch-order-logo.png';
+import book from '../images/book.png';
+import { Link } from 'react-router-dom';
 
 function Library() {
-  const [tag, setTag] = useState("bname");
-  const [order, setOrder] = useState("1");
+  const [tag, setTag] = useState('bname');
+  const [order, setOrder] = useState('1');
   const [noOfBooks, setBookNo] = useState(0);
   const [noOfAuthors, setAuthorNo] = useState(0);
   const [noOfEditions, setEditionNo] = useState(0);
   const [books, setBooks] = useState([]);
-  const [searchVal, setSearchVal] = useState("");
+  const [searchVal, setSearchVal] = useState('');
 
   async function getCount() {
     try {
-      const doc = await fetch("/api/library/count");
+      const doc = await fetch('/api/library/count');
       const { noOfBooks, noOfAuthors, noOfEditions } = await doc.json();
       setBookNo(noOfBooks);
       setAuthorNo(noOfAuthors);
@@ -43,7 +43,7 @@ function Library() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (searchVal !== "") {
+    if (searchVal !== '') {
       const doc = await fetch(
         `/api/library/search?tag=${tag}&filter=${searchVal}`
       );
@@ -56,32 +56,33 @@ function Library() {
     }
   };
   const handleKeyDown = async (e) => {
-    if (e.code === "Enter" || e.code === "NumpadEnter") handleSubmit(e);
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') handleSubmit(e);
   };
 
   const handleOrder = (e) => {
     e.preventDefault();
-    if (order === "1") setOrder("-1");
-    else setOrder("1");
+    if (order === '1') setOrder('-1');
+    else setOrder('1');
   };
 
-  const handleDelete = async(el) => {
+  const handleDelete = async (el) => {
     try {
-      await fetch(`api/library/delete?bname=${el.bname}&edition=${el.edition}`,
-      {
-          method: "POST"
+      await fetch(
+        `api/library/delete?bname=${el.bname}&edition=${el.edition}`,
+        {
+          method: 'POST',
+        }
+      );
+      const updatedBooks = _.remove(books, function (n) {
+        return n.bname === el.bname;
       });
-      const updatedBooks = _.remove(books, function(n) { return n.bname === el.bname});
       setBooks(updatedBooks);
-    } catch (err) {
-
-    }
-  }
+    } catch (err) {}
+  };
 
   useEffect(() => {
     getCount();
-    if(searchVal === '')
-      getBooks();
+    if (searchVal === '') getBooks();
   }, [tag, order, noOfBooks, noOfAuthors, noOfEditions, books.length]);
   console.log(searchVal);
   return (
@@ -89,8 +90,11 @@ function Library() {
       <Row>
         <Col className="leftside" md={2}>
           <p>
-            <span className="pageimageholder" style={{ marginTop: "40px", border: "1px solid" }}>
-              <img style={{ marginTop: "40px" }} src={libraryLogo} alt="" />
+            <span
+              className="pageimageholder"
+              style={{ marginTop: '40px', border: '1px solid' }}
+            >
+              <img style={{ marginTop: '40px' }} src={libraryLogo} alt="" />
             </span>
           </p>
           <p className="page-title">LIBRARY</p>
@@ -101,7 +105,7 @@ function Library() {
           </p>
           <br></br>
           <Link to="/library/add">
-            <button className="add-btn" style={{border: "1px solid"}}>
+            <button className="add-btn" style={{ border: '1px solid' }}>
               <i class="fa fa-plus mr-3" aria-hidden="true"></i>Add Book
             </button>
           </Link>
@@ -112,7 +116,7 @@ function Library() {
             <Col
               md={1}
               onClick={() => {
-                setTag("bname");
+                setTag('bname');
               }}
             >
               Name
@@ -120,7 +124,7 @@ function Library() {
             <Col
               md={1}
               onClick={() => {
-                setTag("author");
+                setTag('author');
               }}
             >
               Author
@@ -129,7 +133,7 @@ function Library() {
               className="mr-auto"
               md={1}
               onClick={() => {
-                setTag("edition");
+                setTag('edition');
               }}
             >
               Edition
@@ -142,10 +146,10 @@ function Library() {
               value={searchVal}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              style={{ border: "1px solid" }}
+              style={{ border: '1px solid' }}
             />
             <buttton onClick={handleOrder}>
-              <img src={switchOrder} alt=""></img>{" "}
+              <img src={switchOrder} alt=""></img>{' '}
             </buttton>
           </Row>
           <hr></hr>
@@ -153,11 +157,16 @@ function Library() {
           <Row className="homerow justify-content-md-center">
             {books.length > 0 &&
               books.map((el, id) => (
-                <Col md={5} key={id} className="pagegrid" style={{ border: "1px solid" }}>
+                <Col
+                  md={5}
+                  key={id}
+                  className="pagegrid"
+                  style={{ border: '1px solid' }}
+                >
                   <Row>
                     <Col md={1}>
                       <span>
-                        <img style={{ marginTop: "30px" }} src={book} alt="" />
+                        <img style={{ marginTop: '30px' }} src={book} alt="" />
                       </span>
                     </Col>
                     <Col>
@@ -166,13 +175,17 @@ function Library() {
                         <Link to={`/library/update/${el.bookid}`}>
                           <i class="fa fa-pencil mr-3" aria-hidden="true" />
                         </Link>
-                        <i class="fa fa-trash" aria-hidden="true" onClick={() => handleDelete(el)} />
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() => handleDelete(el)}
+                        />
                       </p>
                       <p className="grid-title ">{el.bname}</p>
-                      <span style={{ float: "right" }}> - {el.author}</span>
+                      <span style={{ float: 'right' }}> - {el.author}</span>
                     </Col>
                   </Row>
-                  <p style={{ position: "absolute", bottom: "0" }}>
+                  <p style={{ position: 'absolute', bottom: '0' }}>
                     Edition {el.edition}
                   </p>
                 </Col>

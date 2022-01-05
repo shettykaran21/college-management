@@ -142,3 +142,8 @@ button {
   height: 50px;
   padding: 13px;
 }
+
+.logo {
+  height: 1rem;
+  width: 2rem;
+}

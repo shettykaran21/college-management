@@ -1,19 +1,17 @@
-import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 
-import djs from "../images/djs.png";
+import vit from '../images/vit-logo.png';
 
 class TopNav extends Component {
   render() {
     return (
-      <Navbar bg="dark" variant="dark" style={{maxHeight: "60px"}}>
+      <Navbar bg="dark" variant="dark" style={{ maxHeight: '60px' }}>
         <Link to="/">
           <Navbar.Brand href="#home" className="navtitle">
-            <img src={djs} alt="" />
+            <img src={vit} alt="" className="logo" />
           </Navbar.Brand>
         </Link>
 
@@ -28,7 +26,7 @@ class TopNav extends Component {
             aria-expanded="false"
           >
             <i
-              style={{ color: "white", fontSize: "23px" }}
+              style={{ color: 'white', fontSize: '23px' }}
               class="fa fa-bars"
               aria-hidden="true"
             ></i>

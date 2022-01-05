@@ -1,9 +1,10 @@
-exports.getAllStudents = (req,res) => {
-    const connection = req.app.get('connection');
+exports.getAllStudents = async (req, res) => {
+  const connection = req.app.get('connection');
 
-    connection.query('SELECT * FROM student', (err, result) => {
-        if(!err) {
-            res.status(200).json(result);
-        }
-    });
-}
+  try {
+    const result = await connection.query('SELECT * FROM student');
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.log(err);
+  }
+};

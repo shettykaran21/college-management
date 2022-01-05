@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import departmentLogo from "../images/department-lg.png";
-import switchOrder from "../images/switch-order-logo.png";
-import vector from "../images/Vector.png";
+import React, { useState, useEffect } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import departmentLogo from '../images/department-lg.png';
+import switchOrder from '../images/switch-order-logo.png';
+import vector from '../images/Vector.png';
 
 function Department() {
-  const [tag, setTag] = useState("dname");
-  const [order, setOrder] = useState("1");
+  const [tag, setTag] = useState('dname');
+  const [order, setOrder] = useState('1');
   const [noOfDepartments, setDepartmentNo] = useState(0);
   const [noOfFaculties, setFacultyNo] = useState(0);
   const [noOfStudents, setStudentNo] = useState(0);
   const [departments, setDepartments] = useState([]);
-  const [searchVal, setSearchVal] = useState("");
+  const [searchVal, setSearchVal] = useState('');
 
   async function getCount() {
     try {
-      const doc = await fetch("/api/department/count");
+      const doc = await fetch('/api/department/count');
       const { noOfDepartments, noOfFaculties, noOfStudents } = await doc.json();
       setDepartmentNo(noOfDepartments);
       setFacultyNo(noOfFaculties);
@@ -42,7 +42,7 @@ function Department() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (searchVal !== "") {
+    if (searchVal !== '') {
       const doc = await fetch(
         `/api/department/search?tag=${tag}&filter=${searchVal}`
       );
@@ -55,13 +55,13 @@ function Department() {
     }
   };
   const handleKeyDown = async (e) => {
-    if (e.code === "Enter" || e.code === "NumpadEnter") handleSubmit(e);
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') handleSubmit(e);
   };
 
   const handleOrder = (e) => {
     e.preventDefault();
-    if (order === "1") setOrder("-1");
-    else setOrder("1");
+    if (order === '1') setOrder('-1');
+    else setOrder('1');
   };
 
   useEffect(() => {
@@ -76,10 +76,10 @@ function Department() {
             <p>
               <span
                 className="pageimageholder"
-                style={{ marginTop: "40px", border: "1px solid" }}
+                style={{ marginTop: '40px', border: '1px solid' }}
               >
                 <img
-                  style={{ marginTop: "40px" }}
+                  style={{ marginTop: '40px' }}
                   src={departmentLogo}
                   alt=""
                 />
@@ -98,7 +98,7 @@ function Department() {
               <Col
                 md={1}
                 onClick={() => {
-                  setTag("dname");
+                  setTag('dname');
                 }}
               >
                 Name
@@ -106,7 +106,7 @@ function Department() {
               <Col
                 md={1}
                 onClick={() => {
-                  setTag("fname");
+                  setTag('fname');
                 }}
               >
                 H.O.D
@@ -115,7 +115,7 @@ function Department() {
                 className="mr-auto"
                 md={1}
                 onClick={() => {
-                  setTag("strength");
+                  setTag('strength');
                 }}
               >
                 Strength
@@ -128,10 +128,10 @@ function Department() {
                 value={searchVal}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                style={{ border: "1px solid black" }}
+                style={{ border: '1px solid black' }}
               />
               <buttton onClick={handleOrder}>
-                <img src={switchOrder} alt=""></img>{" "}
+                <img src={switchOrder} alt=""></img>{' '}
               </buttton>
             </Row>
             <hr></hr>
@@ -143,13 +143,13 @@ function Department() {
                     md={5}
                     key={id}
                     className="pagegrid"
-                    style={{ border: "1px solid black" }}
+                    style={{ border: '1px solid black' }}
                   >
                     <Row>
                       <Col md={1}>
                         <span>
                           <img
-                            style={{ marginTop: "30px" }}
+                            style={{ marginTop: '30px' }}
                             src={vector}
                             alt=""
                           />
@@ -159,23 +159,23 @@ function Department() {
                         <br></br>
                         <Link
                           to={`/department/${el.dname
-                            .replace(" ", "-")
-                            .split("-")
+                            .replace(' ', '-')
+                            .split('-')
                             .map(
                               (word) =>
                                 word.charAt(0).toLowerCase() + word.slice(1)
                             )
-                            .join("-")}`}
+                            .join('-')}`}
                         >
                           <p className="grid-title ">{el.dname}</p>
                         </Link>
                         <p className="text-muted float-right mr-4">
-                          {" "}
+                          {' '}
                           - {el.fname}
                         </p>
                       </Col>
                     </Row>
-                    <p style={{ position: "absolute", bottom: "0" }}>
+                    <p style={{ position: 'absolute', bottom: '0' }}>
                       Strength: {el.strength}
                     </p>
                   </Col>
