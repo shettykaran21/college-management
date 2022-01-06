@@ -1,5 +1,10 @@
 const { Router } = require('express');
-const { getAllCommittee, addCommittee, searchCommittee, countCommittee } = require('../controllers/committee');
+const {
+  getAllCommittee,
+  addCommittee,
+  searchCommittee,
+  countCommittee,
+} = require('../controllers/committee');
 
 const router = Router();
 

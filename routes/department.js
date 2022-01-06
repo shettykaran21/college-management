@@ -1,5 +1,14 @@
 const { Router } = require('express');
-const { getAllDepartment, addDepartment, searchDepartment, countDepartment, getADepartment, getADepartmentData, getADepartmentCourse, searchACourse } = require('../controllers/department');
+const {
+  getAllDepartment,
+  addDepartment,
+  searchDepartment,
+  countDepartment,
+  getADepartment,
+  getADepartmentData,
+  getADepartmentCourse,
+  searchACourse,
+} = require('../controllers/department');
 
 const router = Router();
 

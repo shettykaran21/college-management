@@ -6,10 +6,10 @@ const committeeRouter = require('./committee');
 const libraryRouter = require('./library');
 
 module.exports = {
-    facultyRouter,
-    studentRouter,
-    projectRouter,
-    departmentRouter,
-    committeeRouter,
-    libraryRouter
+  facultyRouter,
+  studentRouter,
+  projectRouter,
+  departmentRouter,
+  committeeRouter,
+  libraryRouter,
 };

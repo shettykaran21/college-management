@@ -1,5 +1,10 @@
 const { Router } = require('express');
-const { getAllProjects, addProject, searchProject, countProject } = require('../controllers/projects');
+const {
+  getAllProjects,
+  addProject,
+  searchProject,
+  countProject,
+} = require('../controllers/projects');
 
 const router = Router();
 
