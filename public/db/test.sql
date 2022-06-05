@@ -1,4 +1,5 @@
 SELECT
   *
 FROM
-  teaches;
+  faculty
+  JOIN department ON faculty.did = department.did;
